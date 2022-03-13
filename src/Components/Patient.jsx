@@ -1,33 +1,52 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 
-function Patient(){
+function Patient({pat, setPatient}){ 
+
+    const { nombre, owner, email, date, symptom } = pat
+
     return(
         <>
             <div className = "mb-4 m-2">
                 <p className = "bg-white">
                     Nombre: {''}
-                    <span>Hook</span>
+                    <span>{nombre}</span>
                 </p>
 
                 <p className = "bg-white">
                     Propietario: {''}
-                    <span>Hook</span>
+                    <span>{owner}</span>
                 </p>
 
                 <p className = "bg-white">
                     eMail: {''}
-                    <span>Hook</span>
+                    <span>{email}</span>
                 </p>
 
                 <p className = "bg-white">
                     Fecha alta: {''}
-                    <span>Hook</span>
+                    <span>{date}</span>
                 </p>
 
                 <p className = "bg-white">
                     Sintomas: {''}
-                    <span>Hook</span>
+                    <span>{symptom}</span>
                 </p>
+
+                <div>
+                    <button 
+                    className = "py-2 px-10 bg-indigo-600 hover:bg-indigo-700 text-white font-bold uppercase rounded-lg"
+                    type = "button"
+                    onClick = { () => setPatient(pat) }
+                    >
+                    Editar
+                    </button>
+
+                    <button 
+                    className = "py-2 px-10 bg-red-600 hover:bg-red-700 text-white font-bold uppercase rounded-lg"
+                    type = "button">
+                    Eliminar
+                    </button>
+                </div>
             </div>
         </>
     )
