@@ -5,9 +5,15 @@ import PatientList from './Components/PatientList'
 function App() {
   return (
     <>
+    <div className = "container mx-auto bg-slate-100 h-screen">
       <Header/>
-      <Form/>
-      <PatientList/>
+
+      <div className = "mt-12 flex md:flex">
+        <Form/>
+        <PatientList/>  
+      </div>
+    
+    </div>
     </>
   )
 }
