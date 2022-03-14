@@ -17,6 +17,7 @@ function PatientList({patients, setPatient}){
                 {
                     patients.map( (pat) => (
                             <Patient
+                                key = {pat.id}
                                 pat = {pat}
                                 setPatient = {setPatient}
                             />

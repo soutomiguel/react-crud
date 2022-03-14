@@ -8,11 +8,6 @@ function App() {
 
   const [patients, setPatients] = useState([])
   const [patient, setPatient] = useState({})
-  
-
-  const tomaValor = value => {
-    console.log(value)
-  }
 
   return (
     <>

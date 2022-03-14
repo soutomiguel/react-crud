@@ -1,6 +1,6 @@
 import React,{useEffect} from 'react';
 
-function Patient({pat, setPatient}){ 
+function Patient({pat, setPatient, deletePatient}){ 
 
     const { nombre, owner, email, date, symptom } = pat
 
@@ -43,7 +43,8 @@ function Patient({pat, setPatient}){
 
                     <button 
                     className = "py-2 px-10 bg-red-600 hover:bg-red-700 text-white font-bold uppercase rounded-lg"
-                    type = "button">
+                    type = "button"
+                    >
                     Eliminar
                     </button>
                 </div>
