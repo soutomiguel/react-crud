@@ -1,53 +1,43 @@
-import React,{useEffect} from 'react';
+import React from 'react';
 
-function Patient({pat, setPatient, deletePatient}){ 
+function Patient({ pat, setPatient }){ 
 
-    const { nombre, owner, email, date, symptom } = pat
+    const { name, owner, email, date, symptom } = pat
 
     return(
         <>
             <div className = "mb-4 m-2">
                 <p className = "bg-white">
-                    Nombre: {''}
-                    <span>{nombre}</span>
+                    Nombre: {name}
+                    <span></span>
                 </p>
 
                 <p className = "bg-white">
-                    Propietario: {''}
-                    <span>{owner}</span>
+                    Propietario: {owner}
+                    <span></span>
                 </p>
 
                 <p className = "bg-white">
-                    eMail: {''}
-                    <span>{email}</span>
+                    eMail: {email}
+                    <span></span>
                 </p>
 
                 <p className = "bg-white">
-                    Fecha alta: {''}
-                    <span>{date}</span>
+                    Fecha alta: {date}
+                    <span></span>
                 </p>
 
                 <p className = "bg-white">
-                    Sintomas: {''}
-                    <span>{symptom}</span>
+                    Sintomas: {symptom}
+                    <span></span>
                 </p>
 
-                <div>
-                    <button 
-                    className = "py-2 px-10 bg-indigo-600 hover:bg-indigo-700 text-white font-bold uppercase rounded-lg"
-                    type = "button"
+                <button className = "m-2 p-2 bg-green-500"
                     onClick = { () => setPatient(pat) }
-                    >
-                    Editar
-                    </button>
+                >Edit
+                </button>
 
-                    <button 
-                    className = "py-2 px-10 bg-red-600 hover:bg-red-700 text-white font-bold uppercase rounded-lg"
-                    type = "button"
-                    >
-                    Eliminar
-                    </button>
-                </div>
+                <button className = "m-2 p-2 bg-red-500">Delete</button>
             </div>
         </>
     )

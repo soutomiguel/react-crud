@@ -1,55 +1,47 @@
 import React from 'react';
-import {useState, useEffect} from 'react'
-
 import Error from './Error';
+import { useState } from 'react';
 
 function Form({patients, setPatients, patient}){
-    
-    const [ nombre, setNombre ] = useState('')
+
+    const [ name, setName ] = useState('')
     const [ owner, setOwner ] = useState('')
-    const [ email, setEmail ] = useState('')
+    const [ email, setEmail] = useState('')
     const [ date, setDate ] = useState('')
     const [ symptom, setSymptom ] = useState('')
 
-    const [err, setErr] = useState(false)
-
-    useEffect( () => {
-        if(Object.keys(patient).length > 0){
-            setNombre(patient.nombre)
-            setOwner(patient.owner)
-            setEmail(patient.email)
-            setDate(patient.date)
-            setSymptom(patient.symptom)
-        }
-    }, [patient])
+    const [ err, setErr ] = useState(false)
 
     const generateId = () => {
-        const date = Date.now().toString(36)
         const random = Math.random().toString(36).substring(2)
-        return date + random 
+        const date = Date.now().toString(36)
+        return random + date
     }
 
     const handleSubmit = e => {
         e.preventDefault()
 
-        //Validacion del form
-        if([nombre, owner, email, date, symptom].includes('')){
+        if( [name, owner, email, date, symptom].includes('') ){
             setErr(true)
             return
         }
+
         setErr(false)
 
-        //Objeto de pacientes
-        const objPat = {
-            nombre, 
+        //Patient object
+        const patientObject = {
+            name, 
             owner, 
             email, 
             date, 
-            symptom
+            symptom,
+            id: generateId()
         }
 
+        setPatients([...patients, patientObject])
+
         //Reiniciar form
-        setNombre('')
+        setName('')
         setOwner('')
         setEmail('')
         setDate('')
@@ -65,23 +57,26 @@ function Form({patients, setPatients, patient}){
                 <span className = "text-indigo-600 font-bold text-lg">Administralos</span>
             </p>
 
+            {
+                //Si err es true, entonces...
+                err && <Error
+                    msg = 'Todos los campos son obligatorios'
+                />
+            }
+
             <form 
                 className = "bg-white rounded-md py-10 px-5"
-                onSubmit = {handleSubmit}
+                onClick = { handleSubmit }
             >
-                { 
-                err &&
-                    <Error><p>Todos los campos son obligatorios</p></Error>
-                }
                 <div>
                     <label htmlFor = "pet-name" className = "block text-gray-700 font-bold uppercase">Nombre</label>
                     <input 
                         id = "pet-name" 
-                        type="input"
+                        type = "input"
                         placeholder = "Nombre la mascota"
                         className = "border-2 w-full p-2 mt-2 placeholder-gray-600 rounded-md mb-5"
-                        value = {nombre}
-                        onChange = {e => setNombre(e.target.value)}
+                        value = {name}
+                        onChange = { e => setName(e.target.value) }
                     />
                 </div>
 
@@ -89,11 +84,11 @@ function Form({patients, setPatients, patient}){
                     <label htmlFor = "pet-owner" className = "block text-gray-700 font-bold uppercase">Nombre del propietario</label>
                     <input 
                         id = "pet-owner" 
-                        type="input"
+                        type = "input"
                         placeholder = "Nombre del propietario"
                         className = "border-2 w-full p-2 mt-2 placeholder-gray-600 rounded-md mb-5"
                         value = {owner}
-                        onChange = {e => setOwner(e.target.value)}
+                        onChange = { e => setOwner(e.target.value) }
                     />
                 </div>
 
@@ -101,11 +96,11 @@ function Form({patients, setPatients, patient}){
                     <label htmlFor = "email" className = "block text-gray-700 font-bold uppercase">eMail</label>
                     <input 
                         id = "email" 
-                        type="email"
+                        type = "email"
                         placeholder = "eMail de contacto del propietario"
                         className = "border-2 w-full p-2 mt-2 placeholder-gray-600 rounded-md mb-5"
                         value = {email}
-                        onChange = {e => setEmail(e.target.value)}
+                        onChange = { e => setEmail(e.target.value) }
                     />
                 </div>
 
@@ -113,10 +108,10 @@ function Form({patients, setPatients, patient}){
                     <label htmlFor = "date" className = "block text-gray-700 font-bold uppercase">Alta</label>
                     <input 
                         id = "date" 
-                        type="date"
-                        className = "border-2 w-full p-2 mt-2    rounded-md mb-5"
+                        type = "date"
+                        className = "border-2 w-full p-2 mt-2 rounded-md mb-5"
                         value = {date}
-                        onChange = {e => setDate(e.target.value)}
+                        onChange = { e => setDate(e.target.value) }
                     />
                 </div>
 
@@ -127,15 +122,15 @@ function Form({patients, setPatients, patient}){
                         name = "symptom" 
                         id = "symptom-desc"
                         value = {symptom}
-                        onChange = {e => setSymptom(e.target.value)}
+                        onChange = { e => setSymptom(e.target.value) }
                     >
                     </textarea>
                 </div>
 
                 <input 
-                    type="submit"
+                    type = "submit"
                     className = "bg-indigo-600 w-full p-3 mt-4 text-white uppercase font-bold hover:bg-indigo-700 cursor-pointer transition-all"
-                    value = { patient.id ? 'Editar paciente' : 'Agregar paciente' }
+                    value = {'Agregar paciente'}
                 />
             </form>
 
