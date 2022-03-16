@@ -8,6 +8,8 @@ function App() {
   const [ patients, setPatients ] = useState([])
   const [ patient, setPatient ] = useState({})
 
+  console.log(patient)
+
   return (
     <>
     <div className = "container mx-auto bg-slate-100 h-screen">

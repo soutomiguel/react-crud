@@ -1,6 +1,6 @@
 import React from 'react';
 import Error from './Error';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 function Form({patients, setPatients, patient}){
 
@@ -11,6 +11,16 @@ function Form({patients, setPatients, patient}){
     const [ symptom, setSymptom ] = useState('')
 
     const [ err, setErr ] = useState(false)
+
+    useEffect( () => {
+        if(Object.keys(patient).length > 0){ //Comprueba si el objeto tiene algo
+            setName(patient.name)
+            setOwner(patient.owner)
+            setEmail(patient.email)
+            setDate(patient.date)
+            setSymptom(patient.symptom)
+        }
+    }, [patient] )
 
     const generateId = () => {
         const random = Math.random().toString(36).substring(2)
@@ -35,10 +45,16 @@ function Form({patients, setPatients, patient}){
             email, 
             date, 
             symptom,
-            id: generateId()
         }
 
-        setPatients([...patients, patientObject])
+        //Editando el registro
+        if(patient.id){
+            //Editando registro
+        }else{
+            //Nuevo registro
+            patientObject.id = generateId()
+            setPatients([...patients, patientObject])   
+        }
 
         //Reiniciar form
         setName('')
@@ -59,7 +75,8 @@ function Form({patients, setPatients, patient}){
 
             {
                 //Si err es true, entonces...
-                err && <Error
+                err && 
+                <Error
                     msg = 'Todos los campos son obligatorios'
                 />
             }
@@ -130,7 +147,11 @@ function Form({patients, setPatients, patient}){
                 <input 
                     type = "submit"
                     className = "bg-indigo-600 w-full p-3 mt-4 text-white uppercase font-bold hover:bg-indigo-700 cursor-pointer transition-all"
-                    value = {'Agregar paciente'}
+                    value = {
+                        patient.id 
+                        ? 'Editar paciente'
+                        : 'Agregar paciente'
+                    }
                 />
             </form>
 

@@ -1,5 +1,3 @@
-import React from 'react';
-
 function Patient({ pat, setPatient }){ 
 
     const { name, owner, email, date, symptom } = pat
