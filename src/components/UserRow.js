@@ -1,18 +1,23 @@
 import React from 'react';
 
-const UserRow = ({element}) => {
+const UserRow = ({element, deteleUser, setEditing}) => {
 
-    console.log(element)
-
-    const { user, username } = element
+    const { user, username, id } = element
 
     return(
         <>
         <tr>
+            <td>{id}</td>
             <td>{user}</td>
             <td>{username}</td>
-            <button type = "">Edit</button>
-            <button type = "">Delete</button>
+            <button 
+                type = ""
+                onClick = { () => setEditing(true) }
+            >Edit</button>
+            <button 
+                type = ""
+                onClick = { () => deteleUser(id) }
+            >Delete</button>
         </tr>
         </>
     )

@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
-const AddUserForm = ({ users, setUsers }) => {
+const EditUserForm = ({ users, setUsers }) => {
 
     const [ user, setUser ] = useState('')
     const [ username, setUsername ] = useState('')
@@ -62,11 +62,11 @@ const AddUserForm = ({ users, setUsers }) => {
                 
                 <input 
                     type = 'submit'
-                    value = 'Add user'
+                    value = 'Edit user'
                 />
             </form>
         </>
     )
 }
 
-export default AddUserForm
+export default EditUserForm
