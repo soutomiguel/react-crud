@@ -1,19 +1,33 @@
 import React, {useState} from 'react';
 
-const AddUserForm = () => {
+const AddUserForm = ({ users, setUsers }) => {
 
     const [ user, setUser ] = useState('')
     const [ username, setUsername ] = useState('')
+
+    const [ err, setErr ] = useState(false)
 
     const handleSubmit = e => {
         e.preventDefault()
 
         //Validation
         if([user, username].includes('')){
-          console.log('hay al menos 1 vacio')  
+            setErr(true)
         }else{
-        console.log(`Enviando formulario`)
+            setErr(false)
         }
+
+        //User object
+        const userObject = {
+            user, 
+            username
+        }
+
+        setUsers([...users, userObject])
+        
+        //Reset form
+        setUser('')
+        setUsername('')
     }
 
     return(
@@ -21,11 +35,17 @@ const AddUserForm = () => {
             <form
                 onSubmit = {handleSubmit}
             >
+
+                {
+                    err && (
+                        <div><p>hay un error</p></div>
+                        )
+                }
                 <label htmlFor = 'name'>Enter name</label> <br/>
                 <input 
                     id = 'name'
                     placeholder = 'Name'
-                    //value = {user}
+                    value = {user}
                     onChange = { e => setUser(e.target.value) }
                 /> <br/>
 
@@ -33,7 +53,7 @@ const AddUserForm = () => {
                 <input 
                     id = 'username'
                     placeholder = 'Username'
-                    //value = {username}
+                    value = {username}
                     onChange = { e => setUsername(e.target.value) }
                 /> <br/>
                 

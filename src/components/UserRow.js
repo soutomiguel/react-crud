@@ -1,11 +1,16 @@
 import React from 'react';
 
-const UserRow = () => {
+const UserRow = ({element}) => {
+
+    console.log(element)
+
+    const { user, username } = element
+
     return(
         <>
         <tr>
-            <td>Name</td>
-            <td>data</td>
+            <td>{user}</td>
+            <td>{username}</td>
             <button type = "">Edit</button>
             <button type = "">Delete</button>
         </tr>

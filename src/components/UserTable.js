@@ -1,7 +1,7 @@
 import React from 'react';
 import UserRow from './UserRow';
 
-const UserTable = () => {
+const UserTable = ({users}) => {
     return(
         <>
             <tbody>
@@ -11,7 +11,15 @@ const UserTable = () => {
                     <th>Actions</th>
                 </tr>
 
-                <UserRow />
+                {
+                    users.map( element => (
+                        <UserRow 
+                            element = {element}
+                        />
+                        )
+                    )
+                   //console.log(users)
+                }
             
             </tbody>
         </>
