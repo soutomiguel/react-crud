@@ -1,7 +1,7 @@
 import React from 'react';
 import UserRow from './UserRow';
 
-const UserTable = ({users, deteleUser, setEditing}) => {
+const UserTable = ({users, deteleUser, setEditing, editRow}) => {
 
     return(
         <>
@@ -20,10 +20,11 @@ const UserTable = ({users, deteleUser, setEditing}) => {
                             element = {element}
                             deteleUser = {deteleUser}
                             setEditing = {setEditing}
+                            editRow = {editRow}
                         />
                         )
                     ) : (
-                        <td colspan = "3">No users</td>
+                        <td colSpan = "3">No users</td>
                     )
                 }
             

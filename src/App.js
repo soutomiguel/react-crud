@@ -16,7 +16,23 @@ function App() {
   }
 
   //Edit users
-  const { editing, setEditing } = useState(false)
+  const [ editing, setEditing]  = useState(false)
+  const [ currentUser, setCurrentUser ] = useState({
+    id: null,
+    user: '',
+    username: ''
+  }) //Trae el usuario modificado
+
+  const editRow = user => {
+    setEditing(true)
+    setCurrentUser({
+      id: id,
+      user: user,
+      username: username
+    })
+
+    console.log(currentUser)
+  }
 
   return (
     <>
@@ -24,24 +40,20 @@ function App() {
         <h1>CRUD app</h1>
 
         <div className = "">
-          <h2>Add user</h2>
-
           {
           editing ? (
-          <>
             <fieldset>
+              <h1>Edit user</h1>
               <EditUserForm/>
             </fieldset>
-          </>
             )  : (
-            <>
             <fieldset>
+              <h1>Add user</h1>
               <AddUserForm 
                 users = {users}
                 setUsers = {setUsers}
               />
             </fieldset>
-            </>
             )
           }
           
@@ -53,7 +65,8 @@ function App() {
           <UserTable 
             users = {users}
             deteleUser = {deteleUser}
-            setEditing = {setEditing}
+            //setEditing = {setEditing}
+            editRow = {editRow}
           />
 
         </div>

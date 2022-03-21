@@ -1,6 +1,6 @@
 import React from 'react';
 
-const UserRow = ({element, deteleUser, setEditing}) => {
+const UserRow = ({element, deteleUser, setEditing, editRow}) => {
 
     const { user, username, id } = element
 
@@ -12,7 +12,7 @@ const UserRow = ({element, deteleUser, setEditing}) => {
             <td>{username}</td>
             <button 
                 type = ""
-                onClick = { () => setEditing(true) }
+                onClick = { () => editRow(id, user, username) }
             >Edit</button>
             <button 
                 type = ""
