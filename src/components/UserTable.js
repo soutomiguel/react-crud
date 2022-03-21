@@ -1,7 +1,7 @@
 import React from 'react';
 import UserRow from './UserRow';
 
-const UserTable = ({users, deteleUser, setEditing, editRow}) => {
+const UserTable = ({users, deteleUser, setUser}) => {
 
     return(
         <>
@@ -15,12 +15,11 @@ const UserTable = ({users, deteleUser, setEditing, editRow}) => {
 
                 {
                     users.length > 0 ?
-                        users.map( element => (
+                        users.map( userElement => (
                             <UserRow 
-                            element = {element}
+                            userElement = {userElement}
                             deteleUser = {deteleUser}
-                            setEditing = {setEditing}
-                            editRow = {editRow}
+                            setUser = {setUser}
                         />
                         )
                     ) : (
