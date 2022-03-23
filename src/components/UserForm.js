@@ -1,18 +1,26 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
-const UserForm = ({ users, setUsers }) => {
+const UserForm = ({ users, setUsers, user }) => {
 
-    const [ user, setUser ] = useState('')
+    const [ client, setClient ] = useState('')
     const [ username, setUsername ] = useState('')
 
     const [ err, setErr ] = useState(false)
+    
+    //Este codigo se ejecutara solamente si hay algo dentro de user
+    useEffect( () => {
+        if( Object.keys(user).length > 0 ){
+            setClient(user.client)
+            setUsername(user.username)
+        }
+    },[user] )
 
     const handleSubmit = e => {
         e.preventDefault()
 
         //Validation
-        if([user, username].includes('')){
+        if([client, username].includes('')){
             setErr(true)
         }else{
             setErr(false)
@@ -20,15 +28,35 @@ const UserForm = ({ users, setUsers }) => {
 
         //User object
         const userObject = {
-            id: uuidv4(),
-            user, 
+            client, 
             username
         }
 
-        setUsers([...users, userObject])
+        //Verificando si estamos registrando o editando
+        if( user.id ){
+            //Editando el registro
+            userObject.id = user.id //El ID que tenia en el registro previo lo asigno al objeto nuevo
+            console.log(userObject)
+            console.log(user)
+
+            //Iteramos sobre pacientes para identificar que registro editamos
+            const updatedUsers = users.map( userState =>
+                userState.id === user.id
+                ? userObject //Retornamos el objeto actualizado
+                : userState //Caso contrario retorno el objeto actual
+             )
+             setUsers(updatedUsers)
+
+             console.log(updatedUsers)
+
+        }else{
+            //Nuevo registro
+            userObject.id = uuidv4() //Agrego ID al objeto
+            setUsers([...users, userObject])
+        }
         
         //Reset form
-        setUser('')
+        setClient('')
         setUsername('')
     }
 
@@ -48,8 +76,8 @@ const UserForm = ({ users, setUsers }) => {
                 <input 
                     id = 'name'
                     placeholder = 'Name'
-                    value = {user}
-                    onChange = { e => setUser(e.target.value) }
+                    value = {client}
+                    onChange = { e => setClient(e.target.value) }
                 /> <br/>
 
                 <label htmlFor = 'username'>Enter username</label> <br/>
@@ -62,7 +90,7 @@ const UserForm = ({ users, setUsers }) => {
                 
                 <input 
                     type = 'submit'
-                    value = 'Add user'
+                    value = { user.id ? 'Edit user' : 'Add user' }
                 />
             </form>
         </>

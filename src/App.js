@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 
 import UserTable from './components/UserTable'
 import UserForm from './components/UserForm'
@@ -9,6 +9,22 @@ function App() {
   const [ users, setUsers ] = useState([])
 
   const [ user, setUser ] = useState({})
+
+  //LOCALSTORAGE
+
+  useEffect( () => {
+    const getLocalStorage = () => {
+      const usersLS = JSON.parse(localStorage.getItem('users')) ?? [] //Si no hay nada en LS, agrega un array vacio
+      setUsers(usersLS)
+    }
+
+    getLocalStorage()
+  }, [] ) //Vacio se ejecuta una sola vez
+
+  //Escribiendo en local storage
+  useEffect( () => {
+    localStorage.setItem('users', JSON.stringify(users)) //Agregamos y convertimos a string
+  }, [users] )
 
   //Delete users
   const deteleUser = id => {
@@ -27,6 +43,7 @@ function App() {
               <UserForm 
                 users = {users}
                 setUsers = {setUsers}
+                user = {user}
               />
             </fieldset>
         </div>
