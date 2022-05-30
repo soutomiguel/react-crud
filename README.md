@@ -1,3 +1,3 @@
 # CRUD
 
-https://coderhousestarbucks.netlify.app/
+https://rcrud-app.netlify.app/
