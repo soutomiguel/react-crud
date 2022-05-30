@@ -1,3 +1,3 @@
-# Crud React app
+# CRUD
 
-rcrud-app.netlify.app 
+https://coderhousestarbucks.netlify.app/
